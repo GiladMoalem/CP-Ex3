@@ -13,20 +13,24 @@ while( c!=EOF && c!='\0' && c!='\n' && i < Line-1){
 	c = getchar();
 	}
 s[i]='\0';
+if(c==EOF) return EOF;
 return i;
 }
 
 int getword(char word[]){
 int i=0;
 char c = getchar();
+/*
 while(c!=EOF && (c=='\n' || c=='\t' || c==' '))
 	c = getchar();
-while(c!=EOF && c!='\n' && c!='\t' && c!=' ' && i< WORD-1){
+*/
+while(c!=EOF && c!='\0' && c!='\n' && c!='\t' && c!=' ' && i< WORD-1 && c!='\r'){
 	word[i]=c;
 	i++;
 	c = getchar();
 	}
 word[i] = '\0';
+if(c==EOF) return EOF;
 return i;
 }//
 
@@ -45,7 +49,7 @@ return 0;
 
 int similar(char* t, char* s, int n){
 int i=0,j=0;
-  while(*(t+j)!='\0'){
+  while(*(t+j)!= '\0' ){
 if(*(t+j)==*(s+i)){
 i++;
 j++;
@@ -62,19 +66,21 @@ else return 0;
 
 void print_lines(char *str){
 char line[Line];
-while(getline1(line)){
+while(getline1(line)!=EOF){
 if(substring(line,str))
-  printf("%s \n",line);
+  printf("%s\n", line );
 }
 }//
 
 void print_similar_words(char* str){
 char word[WORD];
-while(getword(word)){
-if(similar(word,str,1))
-	printf("%s \n",word);
+while(getword(word)!=EOF){
+if(similar(word,str,1)){
+	printf("%s\n",word);
+	}
 }//while
 }
+
 
 int main(){
 
@@ -95,7 +101,3 @@ print_similar_words(serch);
 
 return 0;
 }
-
-
-
-

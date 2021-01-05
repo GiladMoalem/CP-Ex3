@@ -1,5 +1,5 @@
 all: isort txtfind
-	ls -l
+	
 
 isort: isort.c isort.o
 	gcc -Wall isort.c -o isort
